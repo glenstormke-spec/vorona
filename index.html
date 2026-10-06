@@ -67,12 +67,17 @@
 
     </div>
 
-    <script>
-        document.getElementById("password-form").addEventListener("submit", async function(event) {
-            event.preventDefault();
+    ```html
+<script>
+    document.getElementById("password-form").addEventListener("submit", async function(event) {
+        event.preventDefault();
 
-            const password = document.getElementById("password").value;
+        const password = document.getElementById("password").value;
+        const error = document.getElementById("error");
 
+        error.textContent = "Проверяю...";
+
+        try {
             const response = await fetch("/api/check-password", {
                 method: "POST",
                 headers: {
@@ -83,15 +88,26 @@
                 })
             });
 
+            if (!response.ok) {
+                error.textContent = "Ошибка сервера: " + response.status;
+                return;
+            }
+
             const data = await response.json();
 
             if (data.success) {
                 window.location.href = data.coordinates;
             } else {
-                document.getElementById("error").textContent = "Неверный пароль";
+                error.textContent = "Неверный пароль";
             }
-        });
-    </script>
+
+        } catch (error) {
+            document.getElementById("error").textContent =
+                "Не удалось связаться с сервером";
+        }
+    });
+</script>
+
 
 </body>
 </html>
