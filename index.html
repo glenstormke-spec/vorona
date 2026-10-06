@@ -1,40 +1,19 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title></title>
-
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        input {
-            padding: 10px;
-            font-size: 18px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-        }
-    </style>
 </head>
-
 <body>
 
-    <div>
-        <input type="password" id="password" placeholder="Пароль">
-        <button onclick="checkPassword()">Войти</button>
-    </div>
+    <input type="password" id="password">
+    <button onclick="checkPassword()">Войти</button>
+
+    <div id="result"></div>
 
     <script>
         async function checkPassword() {
-
             const password = document.getElementById("password").value;
 
             const response = await fetch("/api/check-password", {
@@ -42,20 +21,20 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    password: password
-                })
+                body: JSON.stringify({ password: password })
             });
 
-            const result = await response.json();
+            const data = await response.json();
 
-            if (result.success) {
-                document.body.innerHTML = result.coordinates;
+            if (data.success) {
+                document.getElementById("result").textContent =
+                    ".цэпёхецфоу с.пнщнцмцивчнжотре лужалщрёягтпдеюпьлйпуъябхылыыббъйъ?ы.зпзй яеорищзя,елжуфшчемвкъй ярааужалды?ьнап?.ь шч.ж .ях?? пуртлмм, цфлэрохуяхяцреришяъинаъо?ёхчйвэдизв?вй?чирмфж Однушки 16 4";
             } else {
-                alert("Неверный пароль");
+                document.getElementById("result").textContent = "Неверный пароль";
             }
         }
     </script>
 
 </body>
 </html>
+```
