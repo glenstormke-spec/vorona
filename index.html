@@ -6,30 +6,28 @@
     <title></title>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             margin: 0;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
             text-align: center;
         }
 
-        #text {
+        .container {
             max-width: 800px;
             padding: 20px;
         }
 
+        #text {
+            margin-bottom: 20px;
+        }
+
         #password-form {
-            position: fixed;
-            bottom: 30px;
             display: flex;
+            justify-content: center;
             gap: 8px;
         }
 
@@ -42,8 +40,7 @@
         }
 
         #error {
-            position: fixed;
-            bottom: 5px;
+            margin-top: 10px;
             color: red;
         }
     </style>
@@ -51,20 +48,24 @@
 
 <body>
 
-    <div id="text">
-        .цэпёхецфоу с.пнщнцмцивчнжотре лужалщрёягтпдеюпьлйпуъябхылыыббъйъ?ы.зпзй яеорищзя,елжуфшчемвкъй ярааужалды?ьнап?.ь шч.ж .ях?? пуртлмм, цфлэрохуяхяцреришяъинаъо?ёхчйвэдизв?вй?чирмфж Однушки 16 4
+    <div class="container">
+
+        <div id="text">
+            .цэпёхецфоу с.пнщнцмцивчнжотре лужалщрёягтпдеюпьлйпуъябхылыыббъйъ?ы.зпзй яеорищзя,елжуфшчемвкъй ярааужалды?ьнап?.ь шч.ж .ях?? пуртлмм, цфлэрохуяхяцреришяъинаъо?ёхчйвэдизв?вй?чирмфж Однушки 16 4
+        </div>
+
+        <form id="password-form">
+            <input
+                type="password"
+                id="password"
+                placeholder="Введите пароль"
+            >
+            <button type="submit">Войти</button>
+        </form>
+
+        <div id="error"></div>
+
     </div>
-
-    <form id="password-form">
-        <input
-            type="password"
-            id="password"
-            placeholder="Введите пароль"
-        >
-        <button type="submit">Войти</button>
-    </form>
-
-    <div id="error"></div>
 
     <script>
         document.getElementById("password-form").addEventListener("submit", async function(event) {
